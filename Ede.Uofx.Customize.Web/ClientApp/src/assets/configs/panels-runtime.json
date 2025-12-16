@@ -11,5 +11,9 @@
   "appSample": {
     "exposedModule": "./Panel/App",
     "moduleName": "HelloWorldPanelComponent"
+  },
+  "customerList": {
+    "exposedModule": "./Panel/CustomerList",
+    "moduleName": "CustomerListComponent"
   }
 }
