@@ -11,4 +11,15 @@ export class InspectFieldPropsComponent extends BpmFwPropsComponent{
  constructor(public fb: FormBuilder){
     super(fb);
  }
+
+ ngOnInit(): void {
+  this.pluginUtils.initPluginSettings({
+    toBeSubjects: [{ name: '檢驗日期', jsonPath: 'inspDate' }],
+    toBeConditions: [{ name: '檢驗數量', jsonPath: 'inspQuantity', type: 'Numeric' }],
+    toBeNodes: [{ name: '檢驗人員', jsonPath: 'inspector' }],
+    searchContentJsonPath: 'inspProduct',
+    toBeExports: [{ name: '評語', jsonPath: 'comment' }]
+  })
+
+ }
 }
