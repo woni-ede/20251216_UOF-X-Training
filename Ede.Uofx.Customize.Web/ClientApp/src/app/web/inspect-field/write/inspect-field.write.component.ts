@@ -4,6 +4,8 @@ import { UofxDialogController, UofxDialogOptions } from '@uofx/web-components/di
 import { BpmFwWriteComponent, UofxFormFieldLogic, UofxFormTools, UofxValidators } from '@uofx/web-components/form';
 import { ProductListComponent } from './_dialog/product-list/product-list.component';
 import { NorthWindService } from '@service/northwind.service';
+import { Settings } from '@uofx/core';
+import { UofxUserSetItemType, UofxUserSetPluginHelper } from '@uofx/web-components/user-select';
 
 @Component({
   selector: 'app-inspect-field.write',
@@ -14,6 +16,8 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
 
   form: FormGroup;
   errorMessage: string[] = [];
+  corpId = Settings.UserInfo.corpId;
+  types: Array<UofxUserSetItemType> = [UofxUserSetItemType.DeptEmployee];
 
   inspResults = [
     { name: '通過', code: 'PASSED' },
@@ -25,7 +29,8 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
     private tools: UofxFormTools,
     private fieldLogic: UofxFormFieldLogic,
     private dialogCtrl: UofxDialogController,
-    private northWindServ: NorthWindService
+    private northWindServ: NorthWindService,
+    private userSetHelper: UofxUserSetPluginHelper
   ) {
     super();
   }
@@ -42,6 +47,8 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
       inspQuantity: [0, [Validators.required, Validators.min(1)]],
       inspResult: [null],
       inspProduct: [null, Validators.required],
+      inspDate: [null],
+      inspector: [null]
     })
     this.setFormValue();
   }
@@ -52,6 +59,16 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
       this.form.controls.inspQuantity.setValue(this.value.inspQuantity);
       this.form.controls.inspResult.setValue(this.value.inspResult);
       this.form.controls.inspProduct.setValue(this.value.inspProduct);
+      this.form.controls.inspDate.setValue(this.value.inspDate);
+      this.form.controls.inspector.setValue(this.value.inspector);
+    } else {
+      this.userSetHelper.getUserSetByType(
+        UofxUserSetItemType.DeptEmployee, [{ deptCode: 'd8', account: 'woni' }]
+      ).subscribe({
+        next: res => {
+          this.form.controls.inspector.setValue(res);
+        }
+      })
     }
   }
 

@@ -14,6 +14,9 @@ import { TableModule } from 'primeng/table';
 import { BASIC_HTTP_HANDLER, MyHttpHandler } from '@service/basic/basic-http-handler';
 import { BasicHttpClient } from '@service/basic/basic-http-client';
 import { NorthWindService } from '@service/northwind.service';
+import { UofxDatePickerModule } from '@uofx/web-components/date-picker';
+import { UofxUserSelectModule, UofxUserSetPluginHelper, UofxUserSetPluginService } from "@uofx/web-components/user-select";
+import { UofxToastModule } from '@uofx/web-components/toast';
 
 @NgModule({
   declarations: [
@@ -32,12 +35,17 @@ import { NorthWindService } from '@service/northwind.service';
     DropdownModule,
     UofxButtonModule,
     UofxDialogModule,
-    TableModule
+    TableModule,
+    UofxDatePickerModule,
+    UofxUserSelectModule,
+    UofxToastModule
   ],
   providers: [
     { provide: BASIC_HTTP_HANDLER, useClass: MyHttpHandler },
     BasicHttpClient,
-    NorthWindService
+    NorthWindService,
+    UofxUserSetPluginHelper,
+    UofxUserSetPluginService
   ]
 })
 export class InspectFieldModule {
