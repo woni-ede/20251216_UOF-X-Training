@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UofxDialogController, UofxDialogOptions } from '@uofx/web-components/dialog';
 import { BpmFwWriteComponent, UofxFormFieldLogic, UofxFormTools, UofxValidators } from '@uofx/web-components/form';
 import { ProductListComponent } from './_dialog/product-list/product-list.component';
+import { NorthWindService } from '@service/northwind.service';
 
 @Component({
   selector: 'app-inspect-field.write',
@@ -23,12 +24,14 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
   constructor(private fb: FormBuilder,
     private tools: UofxFormTools,
     private fieldLogic: UofxFormFieldLogic,
-    private dialogCtrl: UofxDialogController
+    private dialogCtrl: UofxDialogController,
+    private northWindServ: NorthWindService
   ) {
     super();
   }
 
   ngOnInit() {
+    this.northWindServ.serverUrl = this.pluginSetting?.entryHost;
     this.initForm();
     this.fieldUtils.syncParentFormStatusToInnerForm(this.form);
   }
@@ -64,7 +67,7 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
     })
   }
 
-  clearProduct(){
+  clearProduct() {
     this.form.controls.inspProduct.setValue(null);
   }
 

@@ -10,6 +10,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { UofxButtonModule } from '@uofx/web-components/button';
 import { UofxDialogModule } from '@uofx/web-components/dialog';
 import { ProductListComponent } from './write/_dialog/product-list/product-list.component';
+import { TableModule } from 'primeng/table';
+import { BASIC_HTTP_HANDLER, MyHttpHandler } from '@service/basic/basic-http-handler';
+import { BasicHttpClient } from '@service/basic/basic-http-client';
+import { NorthWindService } from '@service/northwind.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,13 @@ import { ProductListComponent } from './write/_dialog/product-list/product-list.
     InputNumberModule,
     DropdownModule,
     UofxButtonModule,
-    UofxDialogModule
+    UofxDialogModule,
+    TableModule
+  ],
+  providers: [
+    { provide: BASIC_HTTP_HANDLER, useClass: MyHttpHandler },
+    BasicHttpClient,
+    NorthWindService
   ]
 })
 export class InspectFieldModule {
