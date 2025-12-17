@@ -5,6 +5,37 @@
 <div class="fw-control">
   <uofx-error-block [uofErrorI18nKeys]="errorMessage" [showHeader]="true"></uofx-error-block>
   <!--外掛欄位內容-->
+  <table>
+    <tr>
+      <th>Title1</th>
+      <td>Content1</td>
+      <th>Title1</th>
+      <td>Content1</td>
+    </tr>
+    <tr>
+      <th>Title3</th>
+      <td colspan="3">Content3</td>
+    </tr>
+    <tr>
+      <th><span>評語</span></th>
+      <td colspan="3">
+        <input pInputText />
+      </td>
+    </tr>
+    <tr>
+      <th>檢驗數量</th>
+      <td colspan="3">
+        <p-inputNumber></p-inputNumber>
+      </td>
+    </tr>
+    <tr>
+      <th>檢驗結果</th>
+      <td colspan="3">
+        <p-dropdown [options]="inspResults" optionLabel="name" optionValue="code" styleClass="width-100" filter="true"
+          filterBy="name"></p-dropdown>
+      </td>
+    </tr>
+  </table>
   <div class="fw-descr" *ngIf="showDescr && descr">
     {{ descr }}
   </div>

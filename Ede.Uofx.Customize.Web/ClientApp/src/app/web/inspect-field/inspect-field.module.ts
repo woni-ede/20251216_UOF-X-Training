@@ -4,7 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UofxFormModule, UofxFormFieldBaseModule } from '@uofx/web-components/form';
 import { InspectFieldWriteComponent } from './write/inspect-field.write.component';
 import { InspectFieldPropsComponent } from './props/inspect-field.props.component';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,10 @@ import { InspectFieldPropsComponent } from './props/inspect-field.props.componen
     FormsModule,
     ReactiveFormsModule,
     UofxFormModule,
-    UofxFormFieldBaseModule
+    UofxFormFieldBaseModule,
+    InputTextModule,
+    InputNumberModule,
+    DropdownModule
   ]
 })
 export class InspectFieldModule {

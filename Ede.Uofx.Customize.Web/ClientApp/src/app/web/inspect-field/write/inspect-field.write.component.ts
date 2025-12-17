@@ -9,4 +9,10 @@ import { BpmFwWriteComponent } from '@uofx/web-components/form';
 export class InspectFieldWriteComponent extends BpmFwWriteComponent {
 
   errorMessage: string[] = [];
+
+  inspResults = [
+    { name: '通過', code: 'PASSED' },
+    { name: '不通過', code: 'FAILED' },
+    { name: '需複驗', code: 'RETEST' }
+  ];
 }
