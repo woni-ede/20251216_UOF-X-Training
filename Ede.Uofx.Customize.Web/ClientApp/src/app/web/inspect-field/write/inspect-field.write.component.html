@@ -5,7 +5,7 @@
 <div class="fw-control">
   <uofx-error-block [uofErrorI18nKeys]="errorMessage" [showHeader]="true"></uofx-error-block>
   <!--外掛欄位內容-->
-  <table>
+  <table [formGroup]="form">
     <tr>
       <th>Title1</th>
       <td>Content1</td>
@@ -17,22 +17,24 @@
       <td colspan="3">Content3</td>
     </tr>
     <tr>
-      <th><span>評語</span></th>
+      <th><span [attr.uofx-required]="editable ? true : null">評語</span></th>
       <td colspan="3">
-        <input pInputText />
+        <input pInputText formControlName="comment"/>
+        <uofx-form-error-tip [control]="form.controls.comment"></uofx-form-error-tip>
       </td>
     </tr>
     <tr>
-      <th>檢驗數量</th>
+      <th><span [attr.uofx-required]="editable ? true : null">檢驗數量</span></th>
       <td colspan="3">
-        <p-inputNumber></p-inputNumber>
+        <p-inputNumber formControlName="inspQuantity"></p-inputNumber>
+        <uofx-form-error-tip [control]="form.controls.inspQuantity" rangeText="檢驗數量不可為0"></uofx-form-error-tip>
       </td>
     </tr>
     <tr>
       <th>檢驗結果</th>
       <td colspan="3">
         <p-dropdown [options]="inspResults" optionLabel="name" optionValue="code" styleClass="width-100" filter="true"
-          filterBy="name"></p-dropdown>
+          filterBy="name" formControlName="inspResult"></p-dropdown>
       </td>
     </tr>
   </table>
