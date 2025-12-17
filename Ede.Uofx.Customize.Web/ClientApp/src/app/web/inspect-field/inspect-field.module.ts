@@ -17,6 +17,7 @@ import { NorthWindService } from '@service/northwind.service';
 import { UofxDatePickerModule } from '@uofx/web-components/date-picker';
 import { UofxUserSelectModule, UofxUserSetPluginHelper, UofxUserSetPluginService } from "@uofx/web-components/user-select";
 import { UofxToastModule } from '@uofx/web-components/toast';
+import { UofxFileModule, UofxFilePluginService } from "@uofx/web-components/file";
 
 @NgModule({
   declarations: [
@@ -38,14 +39,16 @@ import { UofxToastModule } from '@uofx/web-components/toast';
     TableModule,
     UofxDatePickerModule,
     UofxUserSelectModule,
-    UofxToastModule
+    UofxToastModule,
+    UofxFileModule
   ],
   providers: [
     { provide: BASIC_HTTP_HANDLER, useClass: MyHttpHandler },
     BasicHttpClient,
     NorthWindService,
     UofxUserSetPluginHelper,
-    UofxUserSetPluginService
+    UofxUserSetPluginService,
+    UofxFilePluginService
   ]
 })
 export class InspectFieldModule {

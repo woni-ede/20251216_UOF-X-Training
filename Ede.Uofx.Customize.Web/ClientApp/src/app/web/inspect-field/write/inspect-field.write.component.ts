@@ -4,8 +4,10 @@ import { UofxDialogController, UofxDialogOptions } from '@uofx/web-components/di
 import { BpmFwWriteComponent, UofxFormFieldLogic, UofxFormTools, UofxValidators } from '@uofx/web-components/form';
 import { ProductListComponent } from './_dialog/product-list/product-list.component';
 import { NorthWindService } from '@service/northwind.service';
-import { Settings } from '@uofx/core';
+import { Settings, UofxConsole } from '@uofx/core';
 import { UofxUserSetItemType, UofxUserSetPluginHelper } from '@uofx/web-components/user-select';
+import { UofxFilePluginService } from '@uofx/web-components/file';
+import { environment as env } from '@env/environment';
 
 @Component({
   selector: 'app-inspect-field.write',
@@ -18,6 +20,7 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
   errorMessage: string[] = [];
   corpId = Settings.UserInfo.corpId;
   types: Array<UofxUserSetItemType> = [UofxUserSetItemType.DeptEmployee];
+  pluginCode = env.manifest.code;
 
   inspResults = [
     { name: '通過', code: 'PASSED' },
@@ -30,7 +33,8 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
     private fieldLogic: UofxFormFieldLogic,
     private dialogCtrl: UofxDialogController,
     private northWindServ: NorthWindService,
-    private userSetHelper: UofxUserSetPluginHelper
+    private userSetHelper: UofxUserSetPluginHelper,
+    private filePluginServ: UofxFilePluginService
   ) {
     super();
   }
@@ -48,7 +52,8 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
       inspResult: [null],
       inspProduct: [null, Validators.required],
       inspDate: [null],
-      inspector: [null]
+      inspector: [null],
+      inspReport: [null]
     })
     this.setFormValue();
   }
@@ -61,6 +66,7 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
       this.form.controls.inspProduct.setValue(this.value.inspProduct);
       this.form.controls.inspDate.setValue(this.value.inspDate);
       this.form.controls.inspector.setValue(this.value.inspector);
+      this.form.controls.inspReport.setValue(this.value.inspReport);
     } else {
       this.userSetHelper.getUserSetByType(
         UofxUserSetItemType.DeptEmployee, [{ deptCode: 'd8', account: 'woni' }]
@@ -93,6 +99,11 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
       this.valueChanges.emit(this.form.value);
       this.tools.markFormGroup(this.form);
       this.fieldLogic.checkValidators(checkValidator, this.selfControl, this.form);
+      this.filePluginServ.submitFile(this.form.controls.inspReport.value).subscribe({
+        next: res => {
+          UofxConsole.log("已提交");
+        }
+      })
       if (!checkValidator) return resolve(true);
       resolve(this.form.valid);
     });

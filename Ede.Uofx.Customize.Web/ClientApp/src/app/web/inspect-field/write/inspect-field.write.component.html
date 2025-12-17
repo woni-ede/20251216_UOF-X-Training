@@ -62,6 +62,13 @@
         <uofx-user-select [types]="types" [corpId]="corpId" formControlName="inspector"></uofx-user-select>
       </td>
     </tr>
+    <tr>
+      <th><span>檢驗報告</span></th>
+      <td colspan="3">
+        <uofx-file-upload formControlName="inspReport" [module]="'Plugin'"
+        [pluginCode]="pluginCode"></uofx-file-upload>
+      </td>
+    </tr>
   </table>
   <div class="fw-descr" *ngIf="showDescr && descr">
     {{ descr }}
