@@ -7,11 +7,15 @@ import { InspectFieldPropsComponent } from './props/inspect-field.props.componen
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
+import { UofxButtonModule } from '@uofx/web-components/button';
+import { UofxDialogModule } from '@uofx/web-components/dialog';
+import { ProductListComponent } from './write/_dialog/product-list/product-list.component';
 
 @NgModule({
   declarations: [
     InspectFieldWriteComponent,
-    InspectFieldPropsComponent
+    InspectFieldPropsComponent,
+    ProductListComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,9 @@ import { DropdownModule } from 'primeng/dropdown';
     UofxFormFieldBaseModule,
     InputTextModule,
     InputNumberModule,
-    DropdownModule
+    DropdownModule,
+    UofxButtonModule,
+    UofxDialogModule
   ]
 })
 export class InspectFieldModule {

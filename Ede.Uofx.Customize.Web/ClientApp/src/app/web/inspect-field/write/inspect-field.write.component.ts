@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UofxDialogController, UofxDialogOptions } from '@uofx/web-components/dialog';
 import { BpmFwWriteComponent, UofxFormFieldLogic, UofxFormTools, UofxValidators } from '@uofx/web-components/form';
+import { ProductListComponent } from './_dialog/product-list/product-list.component';
 
 @Component({
   selector: 'app-inspect-field.write',
@@ -20,7 +22,8 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
 
   constructor(private fb: FormBuilder,
     private tools: UofxFormTools,
-    private fieldLogic: UofxFormFieldLogic
+    private fieldLogic: UofxFormFieldLogic,
+    private dialogCtrl: UofxDialogController
   ) {
     super();
   }
@@ -34,7 +37,8 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
     this.form = this.fb.group({
       comment: ['', [Validators.required, UofxValidators.notAllowedSpaceString]],
       inspQuantity: [0, [Validators.required, Validators.min(1)]],
-      inspResult: [null]
+      inspResult: [null],
+      inspProduct: [null, Validators.required],
     })
     this.setFormValue();
   }
@@ -44,7 +48,24 @@ export class InspectFieldWriteComponent extends BpmFwWriteComponent implements O
       this.form.controls.comment.setValue(this.value.comment);
       this.form.controls.inspQuantity.setValue(this.value.inspQuantity);
       this.form.controls.inspResult.setValue(this.value.inspResult);
+      this.form.controls.inspProduct.setValue(this.value.inspProduct);
     }
+  }
+
+  showDialog() {
+    this.dialogCtrl.create(<UofxDialogOptions>{
+      component: ProductListComponent,
+      size: 'large',
+      params: { data: this.form.controls.inspProduct.value }
+    }).afterClose.subscribe({
+      next: res => {
+        if (res) this.form.controls.inspProduct.setValue(res);
+      }
+    })
+  }
+
+  clearProduct(){
+    this.form.controls.inspProduct.setValue(null);
   }
 
   checkBeforeSubmit(checkValidator: boolean): Promise<boolean> {
