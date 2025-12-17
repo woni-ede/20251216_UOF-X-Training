@@ -25,5 +25,10 @@
     "exposedModule": "./Template",
     "moduleName": "TemplateModule",
     "app": {}
+  },
+  "inspField": {
+    "exposedModule": "./InspectField",
+    "moduleName": "InspectFieldModule",
+    "app": {}
   }
 }

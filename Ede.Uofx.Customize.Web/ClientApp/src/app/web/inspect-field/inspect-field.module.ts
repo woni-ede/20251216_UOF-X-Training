@@ -19,4 +19,12 @@ import { InspectFieldPropsComponent } from './props/inspect-field.props.componen
     UofxFormFieldBaseModule
   ]
 })
-export class InspectFieldModule { }
+export class InspectFieldModule {
+  static comp = {
+    props: InspectFieldPropsComponent,
+    design: InspectFieldWriteComponent,
+    write: InspectFieldWriteComponent,
+    view: InspectFieldWriteComponent,
+    print: InspectFieldWriteComponent
+  }
+}

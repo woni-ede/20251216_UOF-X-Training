@@ -59,6 +59,18 @@
         "minCols": 4,
         "minRows": 1
       }
+    },
+    {
+      "group": "group2",
+      "code": "inspField",
+      "name": "產品檢驗欄位",
+      "icon": "assets/icons/u-plugin-form.svg",
+      "sizeConfig": {
+        "defaultCols": 6,
+        "defaultRows": 3,
+        "minCols": 4,
+        "minRows": 1
+      }
     }
   ]
 }
